@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="mx.com.ediel.mv.punkapp.ui.login.LoginFragment"
+        android:label="login_fragment"
+        tools:layout="@layout/login_fragment" />
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="mx.com.ediel.mv.punkapp.ui.main.MainFragment"
+        android:label="main_fragment"
+        tools:layout="@layout/main_fragment" />
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="mx.com.ediel.mv.punkapp.ui.detail.DetailFragment"
+        android:label="detail_fragment"
+        tools:layout="@layout/detail_fragment" />
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="mx.com.ediel.mv.punkapp.ui.favorites.FavoritesFragment"
+        android:label="favorites_fragment"
+        tools:layout="@layout/favorites_fragment" />
+</navigation>
