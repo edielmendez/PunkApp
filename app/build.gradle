@@ -37,6 +37,10 @@ dependencies {
     implementation Dependencies.appCompat
     implementation Dependencies.material
     implementation Dependencies.constraintLayout
+    //Navigation
+    implementation Dependencies.navigationFragment
+    implementation Dependencies.navigationUI
+
     testImplementation Dependencies.jUnit
     androidTestImplementation Dependencies.extJunit
     androidTestImplementation Dependencies.espressoCore

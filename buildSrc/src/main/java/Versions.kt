@@ -6,4 +6,6 @@ object Versions {
     const val jUnit = "4.13.2"
     const val extJunit = "1.1.5"
     const val espressoCore = "3.5.1"
+    //Navigation
+    const val navigation = "2.5.3"
 }
