@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Punkapp</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <!-- UI -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text_header_login">Iniciar Sesión</string>
+    <string name="text_btn_login">Entrar</string>
+
 </resources>
