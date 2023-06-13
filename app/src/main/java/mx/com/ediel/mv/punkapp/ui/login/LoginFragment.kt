@@ -44,12 +44,12 @@ class LoginFragment : Fragment() {
         val username = binding.editUsername.text.toString()
         val password = binding.editPassword.text.toString()
         if(username.isNullOrEmpty()){
-            binding.editUsername.error = "Campos vacíos"
+            binding.editUsername.error = getString(R.string.text_empty_field)
             binding.editUsername.requestFocus()
             return
         }
         if(password.isNullOrEmpty()){
-            binding.editPassword.error = "Campos vacíos"
+            binding.editPassword.error = getString(R.string.text_empty_field)
             binding.editPassword.requestFocus()
             return
         }
