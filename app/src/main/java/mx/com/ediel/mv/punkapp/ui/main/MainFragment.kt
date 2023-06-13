@@ -1,16 +1,20 @@
 package mx.com.ediel.mv.punkapp.ui.main
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import mx.com.ediel.mv.punkapp.R
 import mx.com.ediel.mv.punkapp.data.models.FakeDate
 import mx.com.ediel.mv.punkapp.databinding.FavoritesFragmentBinding
 import mx.com.ediel.mv.punkapp.databinding.MainFragmentBinding
 import mx.com.ediel.mv.punkapp.ui.common.GenericAlertDialog
+import mx.com.ediel.mv.punkapp.ui.detail.DetailFragment
 
 class MainFragment : Fragment() {
     private var _binding: MainFragmentBinding? = null
@@ -38,7 +42,7 @@ class MainFragment : Fragment() {
     private fun setUpAdapter() {
         adapter = MainScreenAdapter()
         adapter.onClickItemListener = {
-
+            findNavController().navigate(R.id.action_mainFragment_to_detailFragment)
         }
 
         binding.recyclerViewMain.setHasFixedSize(true)

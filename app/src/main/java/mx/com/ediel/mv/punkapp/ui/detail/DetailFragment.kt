@@ -1,12 +1,18 @@
 package mx.com.ediel.mv.punkapp.ui.detail
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import androidx.navigation.fragment.findNavController
 import mx.com.ediel.mv.punkapp.R
+import mx.com.ediel.mv.punkapp.databinding.DetailFragmentBinding
+import mx.com.ediel.mv.punkapp.databinding.MainFragmentBinding
+import mx.com.ediel.mv.punkapp.ui.common.GenericAlertDialog
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -18,7 +24,10 @@ private const val ARG_PARAM2 = "param2"
  * Use the [DetailFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class DetailFragment : DialogFragment() {
+class DetailFragment : Fragment() {
+    private var _binding: DetailFragmentBinding? = null
+    private val binding get() = _binding!!
+
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -35,9 +44,47 @@ class DetailFragment : DialogFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.detail_fragment, container, false)
+        _binding = DetailFragmentBinding.inflate(inflater, container, false)
+        return binding.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setUpToolBar()
+    }
+
+    private fun setUpToolBar() {
+        //binding.toolbar.title = "PunkApp"
+        binding.toolbar.setNavigationIcon(R.drawable.baseline_white_arrow_back_24)
+        binding.toolbar.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
+        binding.toolbar.inflateMenu(R.menu.main_menu)
+        binding.toolbar.setOnMenuItemClickListener {
+            when(it.itemId){
+                R.id.action_close -> {
+                    GenericAlertDialog.showDialog(
+                        context = requireActivity(),
+                        title = "Aviso",
+                        message = "Deseas salir de la aplicación",
+                        textBtnAccept = "Aceptar",
+                        textBtnCancel = "Cancelar",
+                        onBtnAcceptClick = {
+                            requireActivity().finish()
+                        },
+                        onBtnCancelClick = {}
+                    )
+                    true
+                }
+                else -> false
+            }
+        }
+    }
+
+    /*override fun getTheme(): Int {
+        super.getTheme()
+        return R.style.DialogTheme
+    }*/
 
     companion object {
         /**

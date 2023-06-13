@@ -33,6 +33,9 @@ class MainScreenAdapter: RecyclerView.Adapter<MainScreenAdapter.BeerItemViewHold
         fun bind(beer: Beer) {
             binding.textNameBeer.text = beer.name
             binding.textTaglineBeer.text = beer.tagline
+            binding.root.setOnClickListener {
+                onClickItemListener?.invoke(beer)
+            }
         }
     }
 }
