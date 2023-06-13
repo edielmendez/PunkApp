@@ -9,10 +9,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DefaultItemAnimator
 import mx.com.ediel.mv.punkapp.R
+import mx.com.ediel.mv.punkapp.data.models.FakeDate
 import mx.com.ediel.mv.punkapp.databinding.DetailFragmentBinding
 import mx.com.ediel.mv.punkapp.databinding.MainFragmentBinding
 import mx.com.ediel.mv.punkapp.ui.common.GenericAlertDialog
+import mx.com.ediel.mv.punkapp.ui.favorites.FavoritesScreenAdapter
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -31,6 +34,8 @@ class DetailFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    lateinit var adapterFoodPairing: FoodPairingAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,10 +56,21 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpToolBar()
+        setUpAdapters()
+    }
+
+    private fun setUpAdapters() {
+        adapterFoodPairing = FoodPairingAdapter()
+        adapterFoodPairing.onClickItemListener = {}
+
+        binding.recyclerViewFoodPairing.setHasFixedSize(true)
+        binding.recyclerViewFoodPairing.itemAnimator = DefaultItemAnimator()
+        binding.recyclerViewFoodPairing.adapter = adapterFoodPairing
+
+        adapterFoodPairing.updateData(FakeDate.foods)
     }
 
     private fun setUpToolBar() {
-        //binding.toolbar.title = "PunkApp"
         binding.toolbar.setNavigationIcon(R.drawable.baseline_white_arrow_back_24)
         binding.toolbar.setNavigationOnClickListener {
             findNavController().popBackStack()

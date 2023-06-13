@@ -87,4 +87,10 @@ object FakeDate {
             rate = 0
         )
     )
+
+    val foods = listOf(
+        "Post Modern Classic. Spiky. Tropical. Hoppy.",
+        "Post Modern Classic. Spiky. Tropical.",
+        "Post Modern Classic. Spiky."
+    )
 }
