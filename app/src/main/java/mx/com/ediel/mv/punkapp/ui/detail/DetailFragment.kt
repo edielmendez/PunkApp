@@ -36,6 +36,7 @@ class DetailFragment : Fragment() {
     private var param2: String? = null
 
     lateinit var adapterFoodPairing: FoodPairingAdapter
+    lateinit var ingredientAdapter: IngredientAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,12 +63,16 @@ class DetailFragment : Fragment() {
     private fun setUpAdapters() {
         adapterFoodPairing = FoodPairingAdapter()
         adapterFoodPairing.onClickItemListener = {}
-
         binding.recyclerViewFoodPairing.setHasFixedSize(true)
         binding.recyclerViewFoodPairing.itemAnimator = DefaultItemAnimator()
         binding.recyclerViewFoodPairing.adapter = adapterFoodPairing
-
         adapterFoodPairing.updateData(FakeDate.foods)
+
+        ingredientAdapter = IngredientAdapter()
+        binding.recyclerViewIngredients.setHasFixedSize(true)
+        binding.recyclerViewIngredients.itemAnimator = DefaultItemAnimator()
+        binding.recyclerViewIngredients.adapter = ingredientAdapter
+        ingredientAdapter.updateData(FakeDate.ingredients)
     }
 
     private fun setUpToolBar() {

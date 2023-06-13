@@ -93,4 +93,23 @@ object FakeDate {
         "Post Modern Classic. Spiky. Tropical.",
         "Post Modern Classic. Spiky."
     )
+
+    val ingredients = listOf(
+        Ingredient(
+            title = "malt",
+            items = listOf(
+                "Extra Pale 5.3 kilograms",
+                "Extra Pale 5.3 kilograms",
+                "Extra Pale 5.3 kilograms"
+            )
+        ),
+        Ingredient(
+            title = "malt",
+            items = listOf(
+                "Extra Pale 5.3 kilograms",
+                "Extra Pale 5.3 kilograms",
+                "Extra Pale 5.3 kilograms"
+            )
+        )
+    )
 }

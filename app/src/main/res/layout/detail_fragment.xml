@@ -167,11 +167,13 @@
                     android:layout_marginTop="8dp"/>
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view_ingredients"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                     app:spanCount="2"
-                    android:layout_marginTop="8dp"/>
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="16dp"/>
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
