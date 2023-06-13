@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import mx.com.ediel.mv.punkapp.R
@@ -45,7 +46,11 @@ class MainFragment : Fragment() {
     private fun setUpAdapter() {
         adapter = MainScreenAdapter()
         adapter.onClickItemListener = {
-            findNavController().navigate(R.id.action_mainFragment_to_detailFragment)
+            findNavController().navigate(R.id.action_mainFragment_to_detailFragment,
+                bundleOf(
+                    "beer_id" to it.id
+                )
+            )
         }
 
         binding.recyclerViewMain.setHasFixedSize(true)

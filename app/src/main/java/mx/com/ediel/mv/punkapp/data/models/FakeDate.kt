@@ -3,61 +3,61 @@ package mx.com.ediel.mv.punkapp.data.models
 object FakeDate {
     val beers = listOf(
         Beer(
-            id = 0,
+            id = 1,
             name = "Punk IPA 2007 - 2010",
             tagline = "Post Modern Classic. Spiky. Tropical. Hoppy.",
             imageUrl = ""
         ),
          Beer(
-             id = 0,
+             id = 2,
              name = "Punk IPA 2007 - 2010",
              tagline = "Post Modern Classic. Spiky. Tropical. Hoppy.",
              imageUrl = ""
          ),
          Beer(
-             id = 0,
+             id = 3,
              name = "Punk IPA 2007 - 2010",
              tagline = "Post Modern Classic. Spiky. Tropical. Hoppy.",
              imageUrl = ""
          ),
          Beer(
-             id = 0,
+             id = 4,
              name = "Punk IPA 2007 - 2010",
              tagline = "Post Modern Classic. Spiky. Tropical. Hoppy.",
              imageUrl = ""
          ),
          Beer(
-             id = 0,
+             id = 5,
              name = "Punk IPA 2007 - 2010",
              tagline = "Post Modern Classic. Spiky. Tropical. Hoppy.",
              imageUrl = ""
          ),
          Beer(
-             id = 0,
+             id = 6,
              name = "Punk IPA 2007 - 2010",
              tagline = "Post Modern Classic. Spiky. Tropical. Hoppy.",
              imageUrl = ""
          ),
          Beer(
-             id = 0,
+             id = 7,
              name = "Punk IPA 2007 - 2010",
              tagline = "Post Modern Classic. Spiky. Tropical. Hoppy.",
              imageUrl = ""
          ),
          Beer(
-             id = 0,
+             id = 8,
              name = "Punk IPA 2007 - 2010",
              tagline = "Post Modern Classic. Spiky. Tropical. Hoppy.",
              imageUrl = ""
          ),
          Beer(
-             id = 0,
+             id = 9,
              name = "Punk IPA 2007 - 2010",
              tagline = "Post Modern Classic. Spiky. Tropical. Hoppy.",
              imageUrl = ""
          ),
          Beer(
-             id = 0,
+             id = 10,
              name = "Punk IPA 2007 - 2010",
              tagline = "Post Modern Classic. Spiky. Tropical. Hoppy.",
              imageUrl = ""

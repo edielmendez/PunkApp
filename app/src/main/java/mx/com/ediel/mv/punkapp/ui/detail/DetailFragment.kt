@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -16,24 +17,16 @@ import mx.com.ediel.mv.punkapp.databinding.DetailFragmentBinding
 import mx.com.ediel.mv.punkapp.databinding.MainFragmentBinding
 import mx.com.ediel.mv.punkapp.ui.common.GenericAlertDialog
 import mx.com.ediel.mv.punkapp.ui.favorites.FavoritesScreenAdapter
+import mx.com.ediel.mv.punkapp.ui.login.LoginFragment
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [DetailFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+private const val BEER_ID = "beer_id"
+
 class DetailFragment : Fragment() {
     private var _binding: DetailFragmentBinding? = null
     private val binding get() = _binding!!
 
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var beer_id: Int = 0
 
     lateinit var adapterFoodPairing: FoodPairingAdapter
     lateinit var ingredientAdapter: IngredientAdapter
@@ -41,8 +34,7 @@ class DetailFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            beer_id = it.getInt(BEER_ID)
         }
     }
 
@@ -56,6 +48,10 @@ class DetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        if(beer_id == 0){
+            Toast.makeText(requireActivity(), "ID no válido", Toast.LENGTH_LONG).show()
+            findNavController().popBackStack()
+        }
         setUpToolBar()
         setUpAdapters()
     }
@@ -102,27 +98,14 @@ class DetailFragment : Fragment() {
         }
     }
 
-    /*override fun getTheme(): Int {
-        super.getTheme()
-        return R.style.DialogTheme
-    }*/
-
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment DetailFragment.
-         */
-        // TODO: Rename and change types and number of parameters
+        val TAG = DetailFragment::class.java.simpleName
+
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(beer_id: String) =
             DetailFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                    putString(BEER_ID, beer_id)
                 }
             }
     }
