@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'com.google.dagger.hilt.android'
 }
 
 android {
@@ -43,6 +45,14 @@ dependencies {
     //Navigation
     implementation Dependencies.navigationFragment
     implementation Dependencies.navigationUI
+    //Room
+    implementation Dependencies.room
+    annotationProcessor Dependencies.roomCompiler
+    implementation Dependencies.roomExt
+    kapt(Dependencies.roomCompiler)
+    //Hilt
+    implementation Dependencies.hilt
+    annotationProcessor Dependencies.hiltCompiler
 
     testImplementation Dependencies.jUnit
     androidTestImplementation Dependencies.extJunit

@@ -9,4 +9,12 @@ object Dependencies {
     //Navigation
     val navigationFragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
     val navigationUI = "androidx.navigation:navigation-ui-ktx:${Versions.navigation}"
+    //Room
+    val room = "androidx.room:room-runtime:${Versions.room}"
+    val roomCompiler = "androidx.room:room-compiler:${Versions.room}"
+    val roomExt = "androidx.room:room-ktx:${Versions.room}"
+    //Hilt
+    val hilt = "com.google.dagger:hilt-android:${Versions.hilt}"
+    val hiltCompiler = "com.google.dagger:hilt-android-compiler:${Versions.hilt}"
+
 }
