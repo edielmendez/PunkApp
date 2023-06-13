@@ -1,7 +1,7 @@
 package mx.com.ediel.mv.punkapp.data.models
 
 object FakeDate {
-     val beers = listOf(
+    val beers = listOf(
         Beer(
             id = 0,
             name = "Punk IPA 2007 - 2010",
@@ -62,5 +62,29 @@ object FakeDate {
              tagline = "Post Modern Classic. Spiky. Tropical. Hoppy.",
              imageUrl = ""
          )
+    )
+
+    val favorites = listOf(
+        Favorite(
+            id = 0,
+            name = "Punk IPA 2007 - 2010",
+            tagline = "Post Modern Classic. Spiky. Tropical. Hoppy.",
+            imageUrl = "",
+            rate = 0
+        ),
+        Favorite(
+            id = 0,
+            name = "Punk IPA 2007 - 2010",
+            tagline = "Post Modern Classic. Spiky. Tropical. Hoppy.",
+            imageUrl = "",
+            rate = 0
+        ),
+        Favorite(
+            id = 0,
+            name = "Punk IPA 2007 - 2010",
+            tagline = "Post Modern Classic. Spiky. Tropical. Hoppy.",
+            imageUrl = "",
+            rate = 0
+        )
     )
 }

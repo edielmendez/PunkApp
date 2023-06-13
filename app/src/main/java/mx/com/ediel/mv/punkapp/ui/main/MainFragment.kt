@@ -37,6 +37,9 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setUpToolBar()
         setUpAdapter()
+        binding.floatingActionButton.setOnClickListener {
+            findNavController().navigate(R.id.action_mainFragment_to_favoritesFragment)
+        }
     }
 
     private fun setUpAdapter() {
