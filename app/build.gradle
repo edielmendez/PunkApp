@@ -52,7 +52,7 @@ dependencies {
     kapt(Dependencies.roomCompiler)
     //Hilt
     implementation Dependencies.hilt
-    annotationProcessor Dependencies.hiltCompiler
+    kapt Dependencies.hiltCompiler
     //Http
     implementation Dependencies.retrofit
     implementation Dependencies.gson

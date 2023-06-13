@@ -5,15 +5,23 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import mx.com.ediel.mv.punkapp.R
+import mx.com.ediel.mv.punkapp.core.ext.nonNullObserve
 import mx.com.ediel.mv.punkapp.databinding.LoginFragmentBinding
+import mx.com.ediel.mv.punkapp.ui.base.PABaseFragment
+import mx.com.ediel.mv.punkapp.ui.common.UIState
 
 
-class LoginFragment : Fragment() {
+@AndroidEntryPoint
+class LoginFragment : PABaseFragment() {
 
     private var _binding: LoginFragmentBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel: LoginViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +38,30 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpListeners()
+        subscribeUI()
+    }
+
+    private fun subscribeUI() {
+        viewModel.state.nonNullObserve(viewLifecycleOwner){
+            when(it){
+                is UIState.Loading -> {
+                    if (it.isLoading){
+                        showLoader()
+                    }else{
+                        hideLoader()
+                    }
+                }
+                is UIState.Success -> {
+                    if(it.data){
+                        findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
+                    }
+                    //adapter.setRecipes(list = it.data)
+                }
+                is UIState.Error -> {
+
+                }
+            }
+        }
     }
 
     private fun setUpListeners() {
@@ -53,7 +85,7 @@ class LoginFragment : Fragment() {
             binding.editPassword.requestFocus()
             return
         }
-        findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
+        viewModel.login(username, password)
     }
 
     companion object {
