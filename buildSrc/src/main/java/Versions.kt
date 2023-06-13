@@ -12,4 +12,12 @@ object Versions {
     const val room = "2.5.0"
     //Hilt
     const val hilt = "2.44"
+    //Retrofit
+    const val retrofit = "2.9.0"
+    const val gson = "2.9.0"
+    const val okhttp3 = "3.4.1"
+    //Lottie
+    val lottie = "5.0.3"
+    //Picasso
+    val picasso = "2.8"
 }

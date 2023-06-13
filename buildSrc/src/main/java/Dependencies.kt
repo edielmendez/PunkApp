@@ -16,5 +16,13 @@ object Dependencies {
     //Hilt
     val hilt = "com.google.dagger:hilt-android:${Versions.hilt}"
     val hiltCompiler = "com.google.dagger:hilt-android-compiler:${Versions.hilt}"
+    //Rertrofit
+    val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
+    val gson = "com.squareup.retrofit2:converter-gson:${Versions.gson}"
+    val loggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.okhttp3}"
+    //Lottie
+    val lottie = "com.airbnb.android:lottie:${Versions.lottie}"
+    //Picasso
+    val picasso = "com.squareup.picasso:picasso:${Versions.picasso}"
 
 }

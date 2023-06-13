@@ -53,6 +53,14 @@ dependencies {
     //Hilt
     implementation Dependencies.hilt
     annotationProcessor Dependencies.hiltCompiler
+    //Http
+    implementation Dependencies.retrofit
+    implementation Dependencies.gson
+    implementation Dependencies.loggingInterceptor
+    //Picasso
+    implementation Dependencies.picasso
+    //Lottie
+    implementation Dependencies.lottie
 
     testImplementation Dependencies.jUnit
     androidTestImplementation Dependencies.extJunit
