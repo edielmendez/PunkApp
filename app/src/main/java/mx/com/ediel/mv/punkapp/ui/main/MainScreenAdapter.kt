@@ -8,6 +8,7 @@ import mx.com.ediel.mv.punkapp.databinding.BeerItemBinding
 
 class MainScreenAdapter: RecyclerView.Adapter<MainScreenAdapter.BeerItemViewHolder>() {
     var onClickItemListener: ((Beer) -> Unit)? = null
+    var onClickFavImgListener: ((Int) -> Unit)? = null
     private val tours: MutableList<Beer> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BeerItemViewHolder {
@@ -35,6 +36,9 @@ class MainScreenAdapter: RecyclerView.Adapter<MainScreenAdapter.BeerItemViewHold
             binding.textTaglineBeer.text = beer.tagline
             binding.root.setOnClickListener {
                 onClickItemListener?.invoke(beer)
+            }
+            binding.imgFavorite.setOnClickListener {
+                onClickFavImgListener?.invoke(beer.id)
             }
         }
     }

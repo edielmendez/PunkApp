@@ -1,7 +1,6 @@
 package mx.com.ediel.mv.punkapp.ui.main
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
+
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -51,6 +50,8 @@ class MainFragment : Fragment() {
                     "beer_id" to it.id
                 )
             )
+        }
+        adapter.onClickFavImgListener = {
         }
 
         binding.recyclerViewMain.setHasFixedSize(true)
