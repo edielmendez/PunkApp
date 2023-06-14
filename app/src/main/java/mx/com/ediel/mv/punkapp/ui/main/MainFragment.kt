@@ -7,20 +7,29 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
+import dagger.hilt.android.AndroidEntryPoint
 import mx.com.ediel.mv.punkapp.R
+import mx.com.ediel.mv.punkapp.core.ext.nonNullObserve
 import mx.com.ediel.mv.punkapp.data.models.FakeDate
 import mx.com.ediel.mv.punkapp.databinding.FavoritesFragmentBinding
 import mx.com.ediel.mv.punkapp.databinding.MainFragmentBinding
+import mx.com.ediel.mv.punkapp.ui.base.PABaseFragment
 import mx.com.ediel.mv.punkapp.ui.common.GenericAlertDialog
+import mx.com.ediel.mv.punkapp.ui.common.UIState
 import mx.com.ediel.mv.punkapp.ui.detail.DetailFragment
+import mx.com.ediel.mv.punkapp.ui.login.LoginViewModel
 
-class MainFragment : Fragment() {
+@AndroidEntryPoint
+class MainFragment : PABaseFragment() {
     private var _binding: MainFragmentBinding? = null
     private val binding get() = _binding!!
 
     lateinit var adapter: MainScreenAdapter
+
+    private val viewModel: MainViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -40,6 +49,37 @@ class MainFragment : Fragment() {
         binding.floatingActionButton.setOnClickListener {
             findNavController().navigate(R.id.action_mainFragment_to_favoritesFragment)
         }
+        viewModel.fetchBeers()
+        subscribeUI()
+    }
+
+    private fun subscribeUI() {
+        viewModel.state.nonNullObserve(viewLifecycleOwner){
+            when(it){
+                is UIState.Loading -> {
+                    if (it.isLoading){
+                        //findNavController().navigate(R.id.action_mainFragment_to_loaderFragment)
+                        showLoader()
+                    }else{
+                        //findNavController().popBackStack()
+                        hideLoader()
+                    }
+                }
+                is UIState.Success -> {
+                    adapter.updateData(it.data)
+                    //adapter.setRecipes(list = it.data)
+                }
+                is UIState.Error -> {
+                    GenericAlertDialog.showDialog(
+                        context = requireActivity(),
+                        title = "Mensaje",
+                        message = it.message,
+                        textBtnAccept = "Aceptar",
+                        onBtnAcceptClick = {}
+                    )
+                }
+            }
+        }
     }
 
     private fun setUpAdapter() {
@@ -57,8 +97,6 @@ class MainFragment : Fragment() {
         binding.recyclerViewMain.setHasFixedSize(true)
         binding.recyclerViewMain.itemAnimator = DefaultItemAnimator()
         binding.recyclerViewMain.adapter = adapter
-
-        adapter.updateData(FakeDate.beers)
     }
 
     private fun setUpToolBar() {

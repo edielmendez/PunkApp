@@ -3,6 +3,7 @@ package mx.com.ediel.mv.punkapp.ui.main
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import mx.com.ediel.mv.punkapp.data.models.Beer
 import mx.com.ediel.mv.punkapp.databinding.BeerItemBinding
 
@@ -34,6 +35,7 @@ class MainScreenAdapter: RecyclerView.Adapter<MainScreenAdapter.BeerItemViewHold
         fun bind(beer: Beer) {
             binding.textNameBeer.text = beer.name
             binding.textTaglineBeer.text = beer.tagline
+            Picasso.get().load(beer.imageUrl).into(binding.imgBeer)
             binding.root.setOnClickListener {
                 onClickItemListener?.invoke(beer)
             }

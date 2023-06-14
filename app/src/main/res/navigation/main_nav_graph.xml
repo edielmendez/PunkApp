@@ -36,4 +36,9 @@
         android:name="mx.com.ediel.mv.punkapp.ui.favorites.FavoritesFragment"
         android:label="favorites_fragment"
         tools:layout="@layout/favorites_fragment" />
+    <dialog
+        android:id="@+id/loaderFragment"
+        android:name="mx.com.ediel.mv.punkapp.ui.common.LoaderFragment"
+        android:label="loader_fragment"
+        tools:layout="@layout/loader_fragment" />
 </navigation>
