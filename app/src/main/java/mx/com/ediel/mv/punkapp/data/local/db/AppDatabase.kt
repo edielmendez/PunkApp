@@ -4,12 +4,15 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import mx.com.ediel.mv.punkapp.data.local.dao.FavoriteDAO
 import mx.com.ediel.mv.punkapp.data.local.dao.UserDAO
+import mx.com.ediel.mv.punkapp.data.local.entities.FavoriteEntity
 import mx.com.ediel.mv.punkapp.data.local.entities.UserEntity
 
-@Database(entities = [UserEntity::class], version = 1, exportSchema = false)
+@Database(entities = [UserEntity::class, FavoriteEntity::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun userDAO(): UserDAO
+    abstract fun favoriteDAO(): FavoriteDAO
 
     companion object {
         private const val DB_NAME = "PUNK_APP_DB_ROOM.db"
