@@ -1,5 +1,6 @@
 package mx.com.ediel.mv.punkapp.ui.login
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,12 +9,13 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import mx.com.ediel.mv.punkapp.data.local.user.AuthRepository
 import mx.com.ediel.mv.punkapp.ui.common.UIState
 import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-
+    private val repository: AuthRepository
 ): ViewModel() {
 
     private val _state = MutableLiveData<UIState<Boolean>>()
@@ -25,9 +27,9 @@ class LoginViewModel @Inject constructor(
         _state.value = UIState.Loading(true)
         job?.cancel()
         job = viewModelScope.launch {
-            delay(3000)
             _state.value = UIState.Loading(false)
-            _state.value = UIState.Success(true)
+            Log.v("LoginViewModel", "${repository.login(email, password)}")
+            _state.value = UIState.Success(repository.login(email, password))
         }
     }
 

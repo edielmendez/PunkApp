@@ -9,7 +9,10 @@ import mx.com.ediel.mv.punkapp.data.local.entities.UserEntity
 @Dao
 interface UserDAO {
     @Query("SELECT * FROM users WHERE id = :id")
-    fun getUser(int: Int): UserEntity
+    fun getUser(id: Int): UserEntity?
+
+    @Query("SELECT * FROM users WHERE email = :email")
+    fun getUserByEmail(email: String): UserEntity?
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun saveUser(user: UserEntity)

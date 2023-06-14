@@ -54,11 +54,15 @@ class LoginFragment : PABaseFragment() {
                 is UIState.Success -> {
                     if(it.data){
                         findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
+                    }else{
+                        binding.textAlert.text = "Username o contraseña incorrectos"
+                        binding.cardAlert.visibility = View.VISIBLE
                     }
                     //adapter.setRecipes(list = it.data)
                 }
                 is UIState.Error -> {
-
+                    binding.textAlert.text = it.message
+                    binding.cardAlert.visibility = View.VISIBLE
                 }
             }
         }
@@ -68,6 +72,9 @@ class LoginFragment : PABaseFragment() {
         with(binding){
             btnLogin.setOnClickListener {
                 attemptLogin()
+            }
+            imgCloseAlert.setOnClickListener {
+                binding.cardAlert.visibility = View.GONE
             }
         }
     }
