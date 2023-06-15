@@ -25,9 +25,13 @@ Punk App , es un code challenge que implementa la API  [https://punkapi.com/docu
      <td>Pantalla de favoritos</td>
   </tr>
   <tr>
-    <td><img src="/screenshots/login.png" width=270 height=480></td>
-    <td><img src="/screenshots/main.png" width=270 height=480></td>
-    <td><img src="/screenshots/detail.png" width=270 height=480></td>
-    <td><img src="/screenshots/favs.png" width=270 height=480></td>
+    <td><img src="/screenshots/login.png" width=270 height=380></td>
+    <td><img src="/screenshots/main.png" width=270 height=380></td>
+    <td><img src="/screenshots/detail.png" width=270 height=380></td>
+    <td><img src="/screenshots/favs.png" width=270 height=380></td>
   </tr>
  </table>
+
+# Usuario
+- email: mendezediel@gmail.com
+- password: 123456_ed
