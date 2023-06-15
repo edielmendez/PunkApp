@@ -14,5 +14,14 @@ data class Beer(
     val firstBrewed: String,
     val brewersTips: String,
     val foodPairing: List<String>,
-    val ingredients: List<Ingredient>
-)
+    val ingredients: List<Ingredient>,
+    val isFavorite: Boolean = false
+){
+    fun toFavorite() = Favorite(
+        id = id,
+        name = name,
+        tagline = tagline,
+        imageUrl = imageUrl,
+        rate = 0
+    )
+}

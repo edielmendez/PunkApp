@@ -10,7 +10,7 @@ data class Favorite(
     val rate: Int
 ){
     fun toFavoriteEntity() = FavoriteEntity(
-        fav_id =  id,
+        id =  id,
         name = name,
         tagline = tagline,
         imageUrl = imageUrl,

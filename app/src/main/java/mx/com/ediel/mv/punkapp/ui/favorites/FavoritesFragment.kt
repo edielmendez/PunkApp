@@ -5,18 +5,27 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
+import dagger.hilt.android.AndroidEntryPoint
 import mx.com.ediel.mv.punkapp.R
+import mx.com.ediel.mv.punkapp.core.ext.nonNullObserve
 import mx.com.ediel.mv.punkapp.databinding.FavoritesFragmentBinding
+import mx.com.ediel.mv.punkapp.ui.base.PABaseFragment
 import mx.com.ediel.mv.punkapp.ui.common.GenericAlertDialog
+import mx.com.ediel.mv.punkapp.ui.common.UIState
+import mx.com.ediel.mv.punkapp.ui.main.MainViewModel
 
 
-class FavoritesFragment : Fragment() {
+@AndroidEntryPoint
+class FavoritesFragment : PABaseFragment() {
     private var _binding: FavoritesFragmentBinding? = null
     private val binding get() = _binding!!
 
     lateinit var adapter: FavoritesScreenAdapter
+
+    private val viewModel: FavoritesViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -33,6 +42,8 @@ class FavoritesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setUpAdapter()
         setUpToolBar()
+        subscribeUI()
+        viewModel.fetchFavorites()
     }
 
     private fun setUpAdapter() {
@@ -46,6 +57,35 @@ class FavoritesFragment : Fragment() {
         binding.recyclerViewFavorites.adapter = adapter
 
         //adapter.updateData(FakeDate.favorites)
+    }
+
+    private fun subscribeUI() {
+        viewModel.state.nonNullObserve(viewLifecycleOwner){
+            when(it){
+                is UIState.Loading -> {
+                    if (it.isLoading){
+                        //findNavController().navigate(R.id.action_mainFragment_to_loaderFragment)
+                        showLoader()
+                    }else{
+                        //findNavController().popBackStack()
+                        hideLoader()
+                    }
+                }
+                is UIState.Success -> {
+                    adapter.updateData(it.data)
+                    //adapter.setRecipes(list = it.data)
+                }
+                is UIState.Error -> {
+                    GenericAlertDialog.showDialog(
+                        context = requireActivity(),
+                        title = "Mensaje",
+                        message = it.message,
+                        textBtnAccept = "Aceptar",
+                        onBtnAcceptClick = {}
+                    )
+                }
+            }
+        }
     }
 
     private fun setUpToolBar() {

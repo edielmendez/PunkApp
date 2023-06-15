@@ -2,6 +2,7 @@ package mx.com.ediel.mv.punkapp.ui.main
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
+import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import mx.com.ediel.mv.punkapp.R
 import mx.com.ediel.mv.punkapp.core.ext.nonNullObserve
@@ -87,6 +89,12 @@ class MainFragment : PABaseFragment() {
             )
         }
         adapter.onClickFavImgListener = {
+            Log.v(TAG, " -  ${it.isFavorite}")
+            if(it.isFavorite){
+                viewModel.deleteFav(it.toFavorite())
+            }else{
+                viewModel.saveFav(it.toFavorite())
+            }
         }
 
         binding.recyclerViewMain.setHasFixedSize(true)

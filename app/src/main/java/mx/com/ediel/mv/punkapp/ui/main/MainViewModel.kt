@@ -10,14 +10,17 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import mx.com.ediel.mv.punkapp.data.local.favorite.FavoriteLocalRepository
 import mx.com.ediel.mv.punkapp.data.models.Beer
+import mx.com.ediel.mv.punkapp.data.models.Favorite
 import mx.com.ediel.mv.punkapp.data.remote.repository.PunkApiRepository
 import mx.com.ediel.mv.punkapp.ui.common.UIState
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val punkApiRepository: PunkApiRepository
+    private val punkApiRepository: PunkApiRepository,
+    private val favoriteLocalRepository: FavoriteLocalRepository
 ): ViewModel() {
     private val _state = MutableLiveData<UIState<List<Beer>>>()
     val state: LiveData<UIState<List<Beer>>> = _state
@@ -37,10 +40,24 @@ class MainViewModel @Inject constructor(
                 _state.value = UIState.Error(it.message ?: "")
             }
         }
-    }
-
-    override fun onCleared() {
+    }override fun onCleared() {
         super.onCleared()
         job?.cancel()
     }
+
+    fun saveFav(favorite: Favorite){
+        job?.cancel()
+        job = viewModelScope.launch {
+           favoriteLocalRepository.saveFavorite(favorite)
+        }
+    }
+
+    fun deleteFav(favorite: Favorite){
+        job?.cancel()
+        job = viewModelScope.launch {
+            favoriteLocalRepository.deleteFavorite(favorite)
+        }
+    }
+
+
 }
