@@ -50,7 +50,7 @@ class MainViewModel @Inject constructor(
             response.onSuccess {
                 val favorites = favoriteLocalRepository.getFavorites().first()
                 beersList.addAll(it.toVerifiedList(favorites))
-                _state.value = UIState.Success(data = MainScreenState(beers = beersList))
+                _state.value = UIState.Success(data = MainScreenState(beers = beersList, positionChanged = null))
             }
             response.onFailure {
                 _state.value = UIState.Error(it.message ?: "")

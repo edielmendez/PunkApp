@@ -72,10 +72,8 @@ class MainFragment : PABaseFragment() {
             when(it){
                 is UIState.Loading -> {
                     if (it.isLoading){
-                        //findNavController().navigate(R.id.action_mainFragment_to_loaderFragment)
                         showLoader()
                     }else{
-                        //findNavController().popBackStack()
                         hideLoader()
                     }
                 }
