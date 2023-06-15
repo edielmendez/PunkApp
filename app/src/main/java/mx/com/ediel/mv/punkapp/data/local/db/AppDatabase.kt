@@ -28,6 +28,7 @@ abstract class AppDatabase : RoomDatabase() {
 
         private fun buildDatabase(context: Context): AppDatabase {
             return Room.databaseBuilder(context, AppDatabase::class.java, DB_NAME)
+                .createFromAsset("db/PUNK_APP_DB_ROOM_db.db")
                 .build()
         }
     }

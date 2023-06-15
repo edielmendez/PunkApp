@@ -14,6 +14,6 @@ interface UserDAO {
     @Query("SELECT * FROM users WHERE email = :email")
     fun getUserByEmail(email: String): UserEntity?
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveUser(user: UserEntity)
 }

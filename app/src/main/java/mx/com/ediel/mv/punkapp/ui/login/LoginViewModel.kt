@@ -28,7 +28,6 @@ class LoginViewModel @Inject constructor(
         job?.cancel()
         job = viewModelScope.launch {
             _state.value = UIState.Loading(false)
-            Log.v("LoginViewModel", "${repository.login(email, password)}")
             _state.value = UIState.Success(repository.login(email, password))
         }
     }
