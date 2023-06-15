@@ -48,8 +48,9 @@ class FavoritesFragment : PABaseFragment() {
 
     private fun setUpAdapter() {
         adapter = FavoritesScreenAdapter()
-        adapter.onClickItemListener = {
-            //findNavController().navigate(R.id.action_mainFragment_to_detailFragment)
+        adapter.onClickItemListener = {}
+        adapter.onRateChangeListener = { id, rate ->
+            viewModel.updateRate(id, rate)
         }
 
         binding.recyclerViewFavorites.setHasFixedSize(true)

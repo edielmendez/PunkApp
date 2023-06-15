@@ -8,5 +8,7 @@ interface FavoriteLocalRepository {
     suspend fun getFavorite(favId: Int): Favorite?
     suspend fun getFavorites(): Flow<List<Favorite>>
     suspend fun saveFavorite(favorite: Favorite)
+
+    suspend fun updateRate(favId: Int, rate: Int)
     suspend fun deleteFavorite(favorite: Favorite)
 }

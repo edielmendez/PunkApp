@@ -24,12 +24,14 @@ class FavoriteLocalRepositoryImpl @Inject constructor(
     }
 
     override suspend fun saveFavorite(favorite: Favorite) = withContext(dispatcher) {
-        Log.v(MainFragment.TAG, " - Repository  saveFavorite")
         dao.saveFavorite(favorite.toFavoriteEntity())
     }
 
+    override suspend fun updateRate(favId: Int, rate: Int) {
+        dao.updateRate(favId, rate)
+    }
+
     override suspend fun deleteFavorite(favorite: Favorite) = withContext(dispatcher) {
-        Log.v(MainFragment.TAG, " - Repository  deleteFavorite")
         dao.deleteFavorite(favorite.toFavoriteEntity())
     }
 

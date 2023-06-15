@@ -2,6 +2,7 @@ package mx.com.ediel.mv.punkapp.ui.favorites
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.RatingBar
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import mx.com.ediel.mv.punkapp.data.models.Favorite
@@ -10,6 +11,7 @@ import mx.com.ediel.mv.punkapp.databinding.FavoriteItemBinding
 
 class FavoritesScreenAdapter: RecyclerView.Adapter<FavoritesScreenAdapter.FavoriteItemViewHolder>() {
     var onClickItemListener: ((Favorite) -> Unit)? = null
+    var onRateChangeListener: ((Int, Int) -> Unit)? = null
     private val favorites: MutableList<Favorite> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteItemViewHolder {
@@ -40,6 +42,10 @@ class FavoritesScreenAdapter: RecyclerView.Adapter<FavoritesScreenAdapter.Favori
             binding.root.setOnClickListener {
                 onClickItemListener?.invoke(favorite)
             }
+            binding.ratingBar.onRatingBarChangeListener =
+                RatingBar.OnRatingBarChangeListener { ratingBar, rating, fromUser ->
+                    onRateChangeListener?.invoke(favorite.id, rating.toInt())
+                }
         }
     }
 }

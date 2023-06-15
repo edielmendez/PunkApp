@@ -15,6 +15,9 @@ interface FavoriteDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveFavorite(favorite: FavoriteEntity)
 
+    @Query("UPDATE favorites SET rate = :rate WHERE id = :favId")
+    suspend fun updateRate(favId: Int, rate: Int)
+
     @Delete
     suspend fun deleteFavorite(favorite: FavoriteEntity)
 }

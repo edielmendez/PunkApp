@@ -38,6 +38,13 @@ class FavoritesViewModel @Inject constructor(
         }
     }
 
+    fun updateRate(favId: Int, rate:Int){
+        job?.cancel()
+        job = viewModelScope.launch {
+            favoriteLocalRepository.updateRate(favId, rate)
+        }
+    }
+
     override fun onCleared() {
         super.onCleared()
         job?.cancel()
