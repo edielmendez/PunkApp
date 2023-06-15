@@ -29,8 +29,17 @@ class PunkApiRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun fetchBeer(beerId: Int): Flow<Beer> = flow {
-        service.fetchBeer(beerId).map { it.toBeer() }.first()
+    override suspend fun fetchBeer(beerId: Int) =  withContext(dispatcher){
+        try {
+            val response = service.fetchBeer(beerId)
+            if(response.isSuccessful){
+                Result.success(response.body()?.first()?.toBeer())
+            }else{
+                Result.failure(Exception(response.errorBody()?.string()))
+            }
+        }catch (exception: Exception){
+            Result.failure(exception)
+        }
     }
 
 }

@@ -5,5 +5,5 @@ import mx.com.ediel.mv.punkapp.data.models.Beer
 
 interface PunkApiRepository {
     suspend fun fetchBeers(page: Int): Result<List<Beer>>
-    suspend fun fetchBeer(beerId: Int): Flow<Beer>
+    suspend fun fetchBeer(beerId: Int): Result<Beer?>
 }

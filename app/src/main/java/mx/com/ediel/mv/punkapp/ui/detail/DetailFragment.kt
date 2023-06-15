@@ -9,20 +9,29 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
+import com.squareup.picasso.Picasso
+import dagger.hilt.android.AndroidEntryPoint
 import mx.com.ediel.mv.punkapp.R
+import mx.com.ediel.mv.punkapp.core.ext.nonNullObserve
+import mx.com.ediel.mv.punkapp.data.models.Beer
 import mx.com.ediel.mv.punkapp.data.models.FakeDate
 import mx.com.ediel.mv.punkapp.databinding.DetailFragmentBinding
 import mx.com.ediel.mv.punkapp.databinding.MainFragmentBinding
+import mx.com.ediel.mv.punkapp.ui.base.PABaseFragment
 import mx.com.ediel.mv.punkapp.ui.common.GenericAlertDialog
+import mx.com.ediel.mv.punkapp.ui.common.UIState
 import mx.com.ediel.mv.punkapp.ui.favorites.FavoritesScreenAdapter
 import mx.com.ediel.mv.punkapp.ui.login.LoginFragment
+import mx.com.ediel.mv.punkapp.ui.main.MainViewModel
 
 
 private const val BEER_ID = "beer_id"
 
-class DetailFragment : Fragment() {
+@AndroidEntryPoint
+class DetailFragment : PABaseFragment() {
     private var _binding: DetailFragmentBinding? = null
     private val binding get() = _binding!!
 
@@ -30,6 +39,8 @@ class DetailFragment : Fragment() {
 
     lateinit var adapterFoodPairing: FoodPairingAdapter
     lateinit var ingredientAdapter: IngredientAdapter
+
+    private val viewModel: DetailViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +65,45 @@ class DetailFragment : Fragment() {
         }
         setUpToolBar()
         setUpAdapters()
+        subscribeUI()
+        viewModel.fetchBeer(beer_id)
+    }
+
+    private fun subscribeUI() {
+        viewModel.state.nonNullObserve(viewLifecycleOwner){
+            when(it){
+                is UIState.Loading -> {
+                    if (it.isLoading){
+                        //findNavController().navigate(R.id.action_mainFragment_to_loaderFragment)
+                        showLoader()
+                    }else{
+                        //findNavController().popBackStack()
+                        hideLoader()
+                    }
+                }
+                is UIState.Success -> {
+                    setUpViews(it.data)
+                }
+                is UIState.Error -> {
+                    GenericAlertDialog.showDialog(
+                        context = requireActivity(),
+                        title = "Mensaje",
+                        message = it.message,
+                        textBtnAccept = "Aceptar",
+                        onBtnAcceptClick = {}
+                    )
+                }
+            }
+        }
+    }
+
+    private fun setUpViews(beer: Beer){
+        with(binding){
+            textName.text = beer.name
+            Picasso.get().load(beer.imageUrl).into(imgBeer)
+            textTagline.text = beer.tagline
+            textTips.text = beer.tagline
+        }
     }
 
     private fun setUpAdapters() {

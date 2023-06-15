@@ -16,5 +16,5 @@ interface PunkApiService {
     @GET("beers/{beerId}")
     suspend fun fetchBeer(
         @Path("beerId") beerId: Int
-    ): Flow<PunkApiBeerDTO>
+    ): Response<List<PunkApiBeerDTO>>
 }
