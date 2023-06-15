@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -41,13 +42,29 @@ class MainFragment : PABaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        subscribeUI()
         setUpToolBar()
         setUpAdapter()
+        initNestedScrollListener()
+        setUpListeners()
+        //viewModel.fetchBeers()
+    }
+
+    private fun setUpListeners() {
         binding.floatingActionButton.setOnClickListener {
             findNavController().navigate(R.id.action_mainFragment_to_favoritesFragment)
         }
-        viewModel.fetchBeers()
-        subscribeUI()
+    }
+
+    private fun initNestedScrollListener() {
+        binding?.nsvMain?.setOnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+            v as NestedScrollView?
+            if (v.getChildAt(v.childCount - 1) != null) {
+                if ((scrollY >= (v.getChildAt(v.childCount - 1).measuredHeight - v.measuredHeight)) && scrollY > oldScrollY) {
+                    viewModel.fetchBeers()
+                }
+            }
+        }
     }
 
     private fun subscribeUI() {
@@ -63,8 +80,8 @@ class MainFragment : PABaseFragment() {
                     }
                 }
                 is UIState.Success -> {
-                    adapter.updateData(it.data)
-                    //adapter.setRecipes(list = it.data)
+                    Log.v(TAG, "${it.data.beers.size} ${it.data.positionChanged}")
+                    adapter.updateData(it.data.beers, it.data.positionChanged)
                 }
                 is UIState.Error -> {
                     GenericAlertDialog.showDialog(
@@ -88,13 +105,8 @@ class MainFragment : PABaseFragment() {
                 )
             )
         }
-        adapter.onClickFavImgListener = {
-            Log.v(TAG, " -  ${it.isFavorite}")
-            if(it.isFavorite){
-                viewModel.deleteFav(it.toFavorite())
-            }else{
-                viewModel.saveFav(it.toFavorite())
-            }
+        adapter.onClickFavImgListener = { position, beer ->
+            viewModel.updateItem(position, beer)
         }
 
         binding.recyclerViewMain.setHasFixedSize(true)

@@ -11,7 +11,7 @@ import mx.com.ediel.mv.punkapp.databinding.BeerItemBinding
 
 class MainScreenAdapter: RecyclerView.Adapter<MainScreenAdapter.BeerItemViewHolder>() {
     var onClickItemListener: ((Beer) -> Unit)? = null
-    var onClickFavImgListener: ((Beer) -> Unit)? = null
+    var onClickFavImgListener: ((Int, Beer) -> Unit)? = null
     private var beers: MutableList<Beer> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BeerItemViewHolder {
@@ -26,15 +26,14 @@ class MainScreenAdapter: RecyclerView.Adapter<MainScreenAdapter.BeerItemViewHold
         holder.bind(beers[position], position)
     }
 
-    fun updateData(list: List<Beer>){
+    fun updateData(list: List<Beer>, position: Int? = null){
         beers.clear()
         beers.addAll(list)
-        notifyDataSetChanged()
-    }
-
-    private fun updateItem(beer: Beer, position: Int){
-        beers.add(position, beer.copy(isFavorite = !beer.isFavorite))
-        notifyItemChanged(position)
+        if(position != null){
+            notifyItemChanged(position)
+        }else{
+            notifyDataSetChanged()
+        }
     }
 
 
@@ -53,8 +52,7 @@ class MainScreenAdapter: RecyclerView.Adapter<MainScreenAdapter.BeerItemViewHold
                 onClickItemListener?.invoke(beer)
             }
             binding.imgFavorite.setOnClickListener {
-                updateItem(beer, position)
-                onClickFavImgListener?.invoke(beer.copy(isFavorite =  !beer.isFavorite))
+                onClickFavImgListener?.invoke(position, beer)
             }
         }
     }
