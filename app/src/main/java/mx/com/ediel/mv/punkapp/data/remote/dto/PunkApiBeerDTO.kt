@@ -2,6 +2,7 @@ package mx.com.ediel.mv.punkapp.data.remote.dto
 
 import com.google.gson.annotations.SerializedName
 import mx.com.ediel.mv.punkapp.data.models.Beer
+import mx.com.ediel.mv.punkapp.data.models.Ingredient
 
 data class PunkApiBeerDTO(
     @SerializedName("id"                ) var id               : Int?              = null,
@@ -13,13 +14,45 @@ data class PunkApiBeerDTO(
     @SerializedName("ingredients"       ) var ingredients      : Ingredients?      = Ingredients(),
     @SerializedName("food_pairing"      ) var foodPairing      : ArrayList<String> = arrayListOf(),
     @SerializedName("brewers_tips"      ) var brewersTips      : String?           = null,
+    @SerializedName("volume"            ) var volume           : Volume?           = Volume(),
+    @SerializedName("abv"               ) var abv              : Double?           = null,
+    @SerializedName("ibu"               ) var ibu              : Double?              = null,
+    @SerializedName("target_fg"         ) var targetFg         : Double?              = null,
+    @SerializedName("target_og"         ) var targetOg         : Double?              = null,
 ){
-    fun toBeer() = Beer(
-        id = id ?: 0,
-        name = name ?: "",
-        tagline = tagline ?: "",
-        imageUrl = imageUrl ?: ""
-    )
+    fun toBeer(): Beer {
+        val ingredientsList: MutableList<Ingredient> = mutableListOf()
+
+        ingredientsList.add(
+            Ingredient(
+                title = "Malt",
+                items = ingredients?.malt?.map { "${it.name} ${it.amount?.value} ${it.amount?.unit}" } ?: emptyList()
+            )
+        )
+        ingredientsList.add(
+            Ingredient(
+                title = "Hops",
+                items = ingredients?.hops?.map { "${it.name} ${it.amount?.value} ${it.amount?.unit}" } ?: emptyList()
+            )
+        )
+
+        return Beer(
+            id = id ?: 0,
+            name = name ?: "",
+            tagline = tagline ?: "",
+            imageUrl = imageUrl ?: "",
+            volume = "${volume?.value} ${volume?.unit}",
+            abv = "$abv",
+            ibu = "$ibu",
+            og = "$targetOg",
+            fg = "$targetFg",
+            yeast = "${ingredients?.yeast}",
+            firstBrewed = "$firstBrewed",
+            brewersTips = "$brewersTips",
+            foodPairing = foodPairing,
+            ingredients = ingredientsList
+        )
+    }
 }
 
 data class Volume (

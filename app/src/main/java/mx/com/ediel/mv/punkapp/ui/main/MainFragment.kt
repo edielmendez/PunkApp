@@ -2,7 +2,6 @@ package mx.com.ediel.mv.punkapp.ui.main
 
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,14 +12,10 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import dagger.hilt.android.AndroidEntryPoint
 import mx.com.ediel.mv.punkapp.R
 import mx.com.ediel.mv.punkapp.core.ext.nonNullObserve
-import mx.com.ediel.mv.punkapp.data.models.FakeDate
-import mx.com.ediel.mv.punkapp.databinding.FavoritesFragmentBinding
 import mx.com.ediel.mv.punkapp.databinding.MainFragmentBinding
 import mx.com.ediel.mv.punkapp.ui.base.PABaseFragment
 import mx.com.ediel.mv.punkapp.ui.common.GenericAlertDialog
 import mx.com.ediel.mv.punkapp.ui.common.UIState
-import mx.com.ediel.mv.punkapp.ui.detail.DetailFragment
-import mx.com.ediel.mv.punkapp.ui.login.LoginViewModel
 
 @AndroidEntryPoint
 class MainFragment : PABaseFragment() {

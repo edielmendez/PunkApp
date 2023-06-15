@@ -47,7 +47,7 @@
                         android:id="@+id/img_beer"
                         android:layout_width="0dp"
                         android:layout_height="150dp"
-                        android:src="@drawable/beer_icon"
+                        tools:src="@drawable/beer_icon"
                         android:layout_marginHorizontal="16dp"
                         android:layout_weight="0.4"/>
 
@@ -64,7 +64,7 @@
                             android:textStyle="bold"
                             android:textSize="25sp"
                             android:textColor="@android:color/darker_gray"
-                            android:text="Buzz"
+                            tools:text="Buzz"
                             android:textAlignment="center"/>
 
                         <TextView
@@ -72,7 +72,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textSize="20sp"
-                            android:text="Post Modern Classic. Spiky. Tropical. Hoppy."
+                            tools:text="Post Modern Classic. Spiky. Tropical. Hoppy."
                             android:textAlignment="textStart"
                             android:layout_marginTop="8dp"/>
 
@@ -83,8 +83,8 @@
                             android:layout_marginTop="8dp">
                             <ImageView
                                 android:layout_width="0dp"
-                                android:layout_height="24dp"
-                                android:src="@drawable/icons_black_heart_24"
+                                android:layout_height="48dp"
+                                android:src="@drawable/icons8_beer_48"
                                 android:layout_weight="0.5"
                                 android:layout_gravity="right"/>
                             <TextView
@@ -93,10 +93,11 @@
                                 android:layout_weight="0.5"
                                 android:textSize="16sp"
                                 android:text="20 Liters"
-                                android:layout_gravity="left"/>
+                                android:layout_gravity="center"/>
                         </androidx.appcompat.widget.LinearLayoutCompat>
 
                         <include
+                            android:id="@+id/specifications"
                             layout="@layout/specifications_layout"/>
 
 
@@ -105,21 +106,23 @@
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <TextView
+                    android:id="@+id/text_yeast"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:textSize="25sp"
                     android:textColor="@android:color/black"
-                    android:text="A Real Bitter Experience"
+                    tools:text="A Real Bitter Experience"
                     android:textAlignment="textStart"
                     android:layout_marginTop="16dp"/>
 
                 <TextView
+                    android:id="@+id/text_brewed"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:textSize="16sp"
-                    android:text="First Brewed: 09/20007"
+                    tools:text="First Brewed: 09/20007"
                     android:textAlignment="textEnd"
                     android:layout_marginTop="4dp"/>
 

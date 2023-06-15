@@ -12,6 +12,7 @@
         android:layout_weight="0.25"
         android:orientation="vertical">
         <TextView
+            android:id="@+id/text_abv_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="18sp"
@@ -20,6 +21,7 @@
             android:textStyle="bold"
             android:textAlignment="center"/>
         <TextView
+            android:id="@+id/text_abv_value"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="12sp"
@@ -33,14 +35,16 @@
         android:layout_weight="0.25"
         android:orientation="vertical">
         <TextView
+            android:id="@+id/text_ibu_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:text="ABV"
+            android:text="IBU"
             android:textColor="@color/blue_200"
             android:textStyle="bold"
             android:textAlignment="center"/>
         <TextView
+            android:id="@+id/text_ibu_value"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="12sp"
@@ -54,14 +58,16 @@
         android:layout_weight="0.25"
         android:orientation="vertical">
         <TextView
+            android:id="@+id/text_og_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:text="ABV"
+            android:text="OG"
             android:textColor="@color/blue_200"
             android:textStyle="bold"
             android:textAlignment="center"/>
         <TextView
+            android:id="@+id/text_og_value"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="12sp"
@@ -75,14 +81,16 @@
         android:layout_weight="0.25"
         android:orientation="vertical">
         <TextView
+            android:id="@+id/text_fg_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:text="ABV"
+            android:text="FG"
             android:textColor="@color/blue_200"
             android:textStyle="bold"
             android:textAlignment="center"/>
         <TextView
+            android:id="@+id/text_fg_value"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="12sp"

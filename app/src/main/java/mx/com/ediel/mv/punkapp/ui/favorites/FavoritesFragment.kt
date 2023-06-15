@@ -8,11 +8,8 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import mx.com.ediel.mv.punkapp.R
-import mx.com.ediel.mv.punkapp.data.models.FakeDate
 import mx.com.ediel.mv.punkapp.databinding.FavoritesFragmentBinding
-import mx.com.ediel.mv.punkapp.databinding.LoginFragmentBinding
 import mx.com.ediel.mv.punkapp.ui.common.GenericAlertDialog
-import mx.com.ediel.mv.punkapp.ui.main.MainScreenAdapter
 
 
 class FavoritesFragment : Fragment() {
@@ -48,7 +45,7 @@ class FavoritesFragment : Fragment() {
         binding.recyclerViewFavorites.itemAnimator = DefaultItemAnimator()
         binding.recyclerViewFavorites.adapter = adapter
 
-        adapter.updateData(FakeDate.favorites)
+        //adapter.updateData(FakeDate.favorites)
     }
 
     private fun setUpToolBar() {

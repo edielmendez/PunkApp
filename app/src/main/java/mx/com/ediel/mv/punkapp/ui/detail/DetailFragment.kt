@@ -1,14 +1,10 @@
 package mx.com.ediel.mv.punkapp.ui.detail
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -17,15 +13,11 @@ import dagger.hilt.android.AndroidEntryPoint
 import mx.com.ediel.mv.punkapp.R
 import mx.com.ediel.mv.punkapp.core.ext.nonNullObserve
 import mx.com.ediel.mv.punkapp.data.models.Beer
-import mx.com.ediel.mv.punkapp.data.models.FakeDate
+import mx.com.ediel.mv.punkapp.data.models.Ingredient
 import mx.com.ediel.mv.punkapp.databinding.DetailFragmentBinding
-import mx.com.ediel.mv.punkapp.databinding.MainFragmentBinding
 import mx.com.ediel.mv.punkapp.ui.base.PABaseFragment
 import mx.com.ediel.mv.punkapp.ui.common.GenericAlertDialog
 import mx.com.ediel.mv.punkapp.ui.common.UIState
-import mx.com.ediel.mv.punkapp.ui.favorites.FavoritesScreenAdapter
-import mx.com.ediel.mv.punkapp.ui.login.LoginFragment
-import mx.com.ediel.mv.punkapp.ui.main.MainViewModel
 
 
 private const val BEER_ID = "beer_id"
@@ -64,7 +56,6 @@ class DetailFragment : PABaseFragment() {
             findNavController().popBackStack()
         }
         setUpToolBar()
-        setUpAdapters()
         subscribeUI()
         viewModel.fetchBeer(beer_id)
     }
@@ -103,22 +94,30 @@ class DetailFragment : PABaseFragment() {
             Picasso.get().load(beer.imageUrl).into(imgBeer)
             textTagline.text = beer.tagline
             textTips.text = beer.tagline
+            specifications.textAbvValue.text = beer.abv
+            specifications.textIbuValue.text = beer.ibu
+            specifications.textOgValue.text = beer.og
+            specifications.textFgValue.text = beer.fg
+            textYeast.text = beer.yeast
+            textBrewed.text = "First Brewed: ${beer.firstBrewed}"
+
+            setUpAdapters(beer.foodPairing, beer.ingredients)
         }
     }
 
-    private fun setUpAdapters() {
+    private fun setUpAdapters(foods: List<String>, ingredients: List<Ingredient>) {
         adapterFoodPairing = FoodPairingAdapter()
         adapterFoodPairing.onClickItemListener = {}
         binding.recyclerViewFoodPairing.setHasFixedSize(true)
         binding.recyclerViewFoodPairing.itemAnimator = DefaultItemAnimator()
         binding.recyclerViewFoodPairing.adapter = adapterFoodPairing
-        adapterFoodPairing.updateData(FakeDate.foods)
+        adapterFoodPairing.updateData(foods)
 
         ingredientAdapter = IngredientAdapter()
         binding.recyclerViewIngredients.setHasFixedSize(true)
         binding.recyclerViewIngredients.itemAnimator = DefaultItemAnimator()
         binding.recyclerViewIngredients.adapter = ingredientAdapter
-        ingredientAdapter.updateData(FakeDate.ingredients)
+        ingredientAdapter.updateData(ingredients)
     }
 
     private fun setUpToolBar() {

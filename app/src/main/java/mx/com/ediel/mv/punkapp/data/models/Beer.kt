@@ -4,5 +4,15 @@ data class Beer(
     val id: Int,
     val name: String,
     val tagline: String,
-    val imageUrl: String
+    val imageUrl: String,
+    val volume: String,
+    val abv: String,
+    val ibu: String,
+    val og: String,
+    val fg: String,
+    val yeast: String,
+    val firstBrewed: String,
+    val brewersTips: String,
+    val foodPairing: List<String>,
+    val ingredients: List<Ingredient>
 )
