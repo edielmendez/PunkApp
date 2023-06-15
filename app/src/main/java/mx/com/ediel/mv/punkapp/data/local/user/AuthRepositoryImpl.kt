@@ -15,13 +15,6 @@ class AuthRepositoryImpl @Inject constructor(
     private val dao: UserDAO
 ): AuthRepository {
     override suspend fun login(email: String, password: String) = withContext(dispatcher){
-        /*dao.saveUser(
-            UserEntity(
-                name = "Ediel",
-                email = "mendezediel@mail.com",
-                password = PAUtilities.base64Encode("123456_ed")
-            )
-        )*/
         val user = dao.getUserByEmail(email)
         if (user == null){
             false

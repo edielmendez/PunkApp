@@ -114,10 +114,6 @@ class MainFragment : PABaseFragment() {
 
     private fun setUpToolBar() {
         binding.toolbar.title = "PunkApp"
-        //binding.toolbar.setNavigationIcon(R.drawable.baseline_arrow_back_white_24)
-        /*binding.toolbar.setNavigationOnClickListener {
-            findNavController().popBackStack()
-        }*/
         binding.toolbar.inflateMenu(R.menu.main_menu)
         binding.toolbar.setOnMenuItemClickListener {
             when(it.itemId){

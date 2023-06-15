@@ -25,7 +25,6 @@ class FavoritesViewModel @Inject constructor(
     private var job: Job? = null
 
     fun fetchFavorites(){
-        //_state.value = UIState.Loading(true)
         job?.cancel()
         job = viewModelScope.launch {
             favoriteLocalRepository.getFavorites()

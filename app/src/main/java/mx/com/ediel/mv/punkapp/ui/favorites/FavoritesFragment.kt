@@ -56,8 +56,6 @@ class FavoritesFragment : PABaseFragment() {
         binding.recyclerViewFavorites.setHasFixedSize(true)
         binding.recyclerViewFavorites.itemAnimator = DefaultItemAnimator()
         binding.recyclerViewFavorites.adapter = adapter
-
-        //adapter.updateData(FakeDate.favorites)
     }
 
     private fun subscribeUI() {
@@ -65,16 +63,13 @@ class FavoritesFragment : PABaseFragment() {
             when(it){
                 is UIState.Loading -> {
                     if (it.isLoading){
-                        //findNavController().navigate(R.id.action_mainFragment_to_loaderFragment)
                         showLoader()
                     }else{
-                        //findNavController().popBackStack()
                         hideLoader()
                     }
                 }
                 is UIState.Success -> {
                     adapter.updateData(it.data)
-                    //adapter.setRecipes(list = it.data)
                 }
                 is UIState.Error -> {
                     GenericAlertDialog.showDialog(
