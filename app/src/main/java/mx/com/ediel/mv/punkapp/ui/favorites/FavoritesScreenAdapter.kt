@@ -36,7 +36,7 @@ class FavoritesScreenAdapter: RecyclerView.Adapter<FavoritesScreenAdapter.Favori
             binding.textName.text = favorite.name
             binding.textTagline.text = favorite.tagline
             Picasso.get().load(favorite.imageUrl).into(binding.imgBeer)
-            binding.ratingBar.numStars = favorite.rate
+            binding.ratingBar.rating = favorite.rate.toFloat()
             binding.root.setOnClickListener {
                 onClickItemListener?.invoke(favorite)
             }

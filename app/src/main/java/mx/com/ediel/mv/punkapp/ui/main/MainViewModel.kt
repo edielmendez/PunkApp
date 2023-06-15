@@ -9,6 +9,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import mx.com.ediel.mv.punkapp.data.local.favorite.FavoriteLocalRepository
 import mx.com.ediel.mv.punkapp.data.models.Beer
@@ -27,20 +29,38 @@ class MainViewModel @Inject constructor(
 
     private var job: Job? = null
 
-    fun fetchBeers(){
+    fun fetchBeers() {
+        if (!(_state.value is UIState.Success)) {
         _state.value = UIState.Loading(true)
         job?.cancel()
         job = viewModelScope.launch {
             val response = punkApiRepository.fetchBeers(1)
             _state.value = UIState.Loading(false)
             response.onSuccess {
-                _state.value = UIState.Success(it)
+                val favorites = favoriteLocalRepository.getFavorites().first()
+                val beers = it.map { beer ->
+                    var isFavorite = false
+                    favorites.forEach { fav ->
+                        if (fav.id == beer.id) {
+                            isFavorite = true
+                        }
+                    }
+                    if (isFavorite) {
+                        beer.copy(isFavorite = true)
+                    } else {
+                        beer
+                    }
+                }
+                _state.value = UIState.Success(beers)
             }
             response.onFailure {
                 _state.value = UIState.Error(it.message ?: "")
             }
         }
-    }override fun onCleared() {
+    }
+    }
+
+    override fun onCleared() {
         super.onCleared()
         job?.cancel()
     }
